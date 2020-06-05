@@ -5,8 +5,8 @@ import simpleMiddleware from "../middlewares/testMiddleware.ts";
 const router = Router();
 
 router
-    .get("/user/:id", simpleMiddleware, getUserDetails)
     .post("/user", simpleMiddleware, createUser)
+    .get("/user/:id", simpleMiddleware, getUserDetails)
     .put("/user", simpleMiddleware, updateUser)
     .delete("/users/:id", simpleMiddleware, removeUser);
 

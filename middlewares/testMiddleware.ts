@@ -12,6 +12,8 @@ import  { Request, Response, Next } from "https://deno.land/x/snowlight/mod.ts";
     console.log('Base Url :: '+req.url);
     console.log('Path :: '+req.path);
     console.log('Search :: '+req.search);
+    console.log('Params; optional :: '+req.params);
+    console.log('Body; optional :: '+req.body);
     console.log('=============================');
     next();
 

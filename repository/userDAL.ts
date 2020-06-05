@@ -9,11 +9,18 @@ export const createUser = async (data: any) => {
 
 export const getUserById = (query: any): any => {
 
+    try {
+      console.log('I was here');
+
     return {
         "name": "William Shakespeare",
         "age": 456,
         "email": "bard.of.avon@heavenmail.com"
     };
+        
+    } catch (e) {
+        throw e
+    } 
 };
 
 export const updateUser = (filter: any, updateBody: any): any => {

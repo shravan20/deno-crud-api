@@ -5,10 +5,12 @@ import { createUserService, getUserService, updateUserService, removeUserService
 export const createUser = async (req: Request, res: Response, next: Next) => {
 
     try {
+        console.log(req.body,"::", req.params)
         let serviceCall = await createUserService(req.body);
         return res.status(200).send(serviceCall);
+        
     } catch (e) {
-
+        console.log(2)
         next(e);
     }
     
@@ -17,10 +19,12 @@ export const createUser = async (req: Request, res: Response, next: Next) => {
 
 export const getUserDetails = async (req: Request, res: Response, next: Next) => {
     try {
+        console.log(1,'++++',req.params.id)
         let serviceCall = await getUserService(req.params);
-        return res.status(200).send("Get User Data");
+        console.log(11)
+        return res.status(200).send(serviceCall);
     } catch (e) {
-        
+        console.log(111)
         next(e);
     }
 

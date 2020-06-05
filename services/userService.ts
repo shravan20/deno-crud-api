@@ -11,9 +11,15 @@ export const createUserService = async (body: any) => {
 
 
 export const getUserService = async (params: any) => {
+    try {
 
-    let userData = await getUserById(params.id);
-    return userData;
+        let userData = await getUserById(params.id);
+        return userData;
+
+    } catch (e) {
+        throw e;
+    }
+    
 };
 
 
