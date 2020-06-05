@@ -1,33 +1,51 @@
-import  { Request, Response } from "https://deno.land/x/snowlight/mod.ts";
+import  { Request, Response, Next } from "https://deno.land/x/snowlight/mod.ts";
+import { createUserService, getUserService, updateUserService, removeUserService } from "../services/userService.ts";
 
 
+export const createUser = async (req: Request, res: Response, next: Next) => {
 
-export const getUserDetails = (req: Request, res: Response) => {
-    return res.status(200).send("Get User Data");
+    try {
+        let serviceCall = await createUserService(req.body);
+        return res.status(200).send(serviceCall);
+    } catch (e) {
 
-}
-
-export const getUsers = (req: Request, res: Response) => {
-
-    return res.status(200).send("Get all Users Data");
-
-}
-
-export const createUser = (req: Request, res: Response) => {
-    let data = req.body.read();
-    console.log(data)
-    return res.status(200).send("Create a User");
+        next(e);
+    }
+    
 
 }
 
-export const updateUser = (req: Request, res: Response) => {
-
-    return res.status(200).send("Update User Data");
+export const getUserDetails = async (req: Request, res: Response, next: Next) => {
+    try {
+        let serviceCall = await getUserService(req.params);
+        return res.status(200).send("Get User Data");
+    } catch (e) {
+        
+        next(e);
+    }
 
 }
 
-export const removeUser = (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response, next: Next) => {
 
-    return res.status(200).send("Removed User");
+    try {
+        let serviceCall = await updateUserService(req.params, req.body);
+        return res.status(200).send(serviceCall);
+    } catch (e) {
+        
+        next(e);
+    }
+    
+}
+
+export const removeUser = async (req: Request, res: Response, next: Next) => {
+
+    try {
+        let serviceCall = await removeUserService(req.params);
+        return res.status(200).send(serviceCall);
+    } catch (e) {
+        
+        next(e);
+    }
 
 }
