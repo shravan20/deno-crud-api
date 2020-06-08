@@ -1,55 +1,56 @@
-import  { Request, Response, Next } from "https://deno.land/x/snowlight/mod.ts";
 import { createUserService, getUserService, updateUserService, removeUserService } from "../services/userService.ts";
 
 
-export const createUser = async (req: Request, res: Response, next: Next) => {
+export const createUser = async (contxt: any) => {
 
     try {
-        console.log(req.body,"::", req.params)
-        let serviceCall = await createUserService(req.body);
-        return res.status(200).send(serviceCall);
+        let serviceCall = await createUserService(contxt.request.body());
+        return res
+                  .status(201)
+                  .send({
+                    "timestamp": new Date(),
+                    "status": 201,
+                    "payload": serviceCall,
+                    "endpoint": req.url
+                  });
         
     } catch (e) {
-        console.log(2)
-        next(e);
+        return res.status(500).send({
+            "timestamp": new Date(),
+            "status": 500,
+            "error": {
+                "name": e.name,
+                "message": e.message
+            },
+            "payload": null,
+            "endpoint": req.url
+    });
     }
-    
-
 }
 
-export const getUserDetails = async (req: Request, res: Response, next: Next) => {
+export const getUserDetails = async (contxt: any) => {
     try {
-        console.log(1,'++++',req.params.id)
-        let serviceCall = await getUserService(req.params);
-        console.log(11)
-        return res.status(200).send(serviceCall);
+
+        let serviceCall = await getUserService(contxt.params);
+        return res.status(200).send({
+            "timestamp": new Date(),
+            "status": 200,
+            "payload": serviceCall,
+            "endpoint": req.url
+            });
     } catch (e) {
-        console.log(111)
-        next(e);
-    }
-
-}
-
-export const updateUser = async (req: Request, res: Response, next: Next) => {
-
-    try {
-        let serviceCall = await updateUserService(req.params, req.body);
-        return res.status(200).send(serviceCall);
-    } catch (e) {
+      
+        return res.status(500).send({
+            "timestamp": new Date(),
+            "status": 500,
+            "error": {
+                "name": e.name,
+                "message": e.message
+            },
+            "payload": null,
+            "endpoint": req.url
+        });
         
-        next(e);
-    }
-    
-}
-
-export const removeUser = async (req: Request, res: Response, next: Next) => {
-
-    try {
-        let serviceCall = await removeUserService(req.params);
-        return res.status(200).send(serviceCall);
-    } catch (e) {
-        
-        next(e);
     }
 
 }

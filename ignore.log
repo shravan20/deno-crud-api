@@ -1,0 +1,74 @@
+router.put("/user", simpleMiddleware, updateUser)
+router.delete("/users/:id", simpleMiddleware, removeUser);
+
+
+export const updateUser = async (contxt: any) => {
+
+    try {
+        let serviceCall = await updateUserService(contxt.params, contxt.request.body());
+        return res.status(204).send({
+            "timestamp": new Date(),
+            "status": 204,
+            "payload": null,
+            "endpoint": req.url
+            });
+    }
+    catch (e) {
+        
+        return res.status(500).send({
+            "timestamp": new Date(),
+            "status": 500,
+            "error": {
+                "name": e.name,
+                "message": e.message
+            },
+            "payload": null,
+            "endpoint": req.url
+        });    
+    }
+    
+}
+
+export const removeUser = async (contxt: any) => {
+
+    try {
+        let serviceCall = await removeUserService(contxt.params);
+        return res.status(204).send({
+            "timestamp": new Date(),
+            "status": 204,
+            "payload": serviceCall,
+            "endpoint": req.url
+        });
+    } catch (e) {
+        return res.status(500).send({
+            "timestamp": new Date(),
+            "status": 500,
+            "error": {
+                "name": e.name,
+                "message": e.message
+            },
+            "payload": null,
+            "endpoint": req.url
+        });
+    }
+
+}
+
+
+export const updateUser = (filter: any, updateBody: any): any => {
+
+    return {
+        "name": "William Shakespeare",
+        "age": 456,
+        "email": "bard.of.avon@heavenmail.com"
+    };
+};
+
+export const deleteUser = (filter: any): any => {
+
+    return {
+        "name": "William Shakespeare",
+        "age": 456,
+        "email": "bard.of.avon@heavenmail.com"
+    };
+};
