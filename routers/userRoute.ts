@@ -1,13 +1,16 @@
-import { getUserDetails, createUser, updateUser, removeUser }  from "../controllers/userController.ts";
-import { Router, Route } from "https://deno.land/x/snowlight/mod.ts";
-import simpleMiddleware from "../middlewares/testMiddleware.ts";
+import { Router } from "https://deno.land/x/oak/mod.ts";
+import { getUserDetails, createUser } from "../controllers/userController.ts";
+// import { simpleMiddleware } from "../middlewares/testMiddleware.ts";
 
-const router = Router();
+const router = new Router();
 
 
-router.post("/user", simpleMiddleware, createUser)
-router.get("/user/:id", simpleMiddleware, getUserDetails)
-router.put("/user", simpleMiddleware, updateUser)
-router.delete("/users/:id", simpleMiddleware, removeUser);
+// router.post("/user", simpleMiddleware, createUser)
+// router.get("/user/:id", simpleMiddleware, getUserDetails)
+
+router.post("/user", createUser);
+router.get("/user/:id", getUserDetails);
+
 
 export default router;
+

@@ -13,6 +13,7 @@ export const getUserById = (query: any): any => {
       console.log('I was here');
 
     return {
+        "id": "emp31",
         "name": "William Shakespeare",
         "age": 456,
         "email": "bard.of.avon@heavenmail.com"
