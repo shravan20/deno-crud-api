@@ -8,8 +8,8 @@ const router = new Router();
 // router.post("/user", simpleMiddleware, createUser)
 // router.get("/user/:id", simpleMiddleware, getUserDetails)
 
-router.post("/user", createUser);
 router.get("/user/:id", getUserDetails);
+router.post("/user", createUser);
 
 
 export default router;

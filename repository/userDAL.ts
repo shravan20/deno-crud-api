@@ -1,23 +1,18 @@
-import { connectToDB } from '../database/config.ts';
-
+import Database from '../database/config.ts';
+const User: any = new Database('user');
 
 export const createUser = async (data: any) => {
     
-    return data;
-
+    let result: any = await User.collection.insertOne(data);
+    return result;
 };
 
-export const getUserById = (query: any): any => {
+export const getUserById = async (query: any) => {
 
     try {
-      console.log('I was here');
-
-    return {
-        "id": "emp31",
-        "name": "William Shakespeare",
-        "age": 456,
-        "email": "bard.of.avon@heavenmail.com"
-    };
+        console.log('Hi. I am in..');
+        
+        return await User.collection.find();
         
     } catch (e) {
         throw e

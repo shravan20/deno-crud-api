@@ -1,7 +1,7 @@
 import { Application } from "https://deno.land/x/oak/mod.ts";
 import router from "./routers/userRoute.ts";
 
-const port = 3000;
+const port = 3001;
 const app = new Application();
 
 //Logger

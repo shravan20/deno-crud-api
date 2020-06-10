@@ -2,7 +2,6 @@ import { getUserById, createUser } from './../repository/userDAL.ts';
 
 export const createUserService = async (body: any) => {
 
-
     let newUser = await createUser(body);
     return newUser;
 };

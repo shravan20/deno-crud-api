@@ -1,18 +1,24 @@
-import { init, MongoClient } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
+import { MongoClient } from "https://deno.land/x/mongo@v0.8.0/mod.ts";
+import  { URI, dbName } from "../keys/appConstants.ts";
 
+class Database  {
 
-
-export const connectToDB = async () => {
+  /**
+   *  Database Connectivity
+   */
   
-  const URI: string = "mongodb://localhost:27017";
-  const dbName: string = "playWithDeno";
-  // console.log(await init(URI));
-  const client = await new MongoClient();
-  await client.connectWithUri(URI);
-  console.log(client)
-  const db = client.database(dbName);
-  const collection = db.collection("users");
-  return collection;
+   //Fields
+   client: any;
+   db: any;
+   collection: any;
+   
+   constructor(collectionName: string) {
+    const client = new MongoClient();
+    client.connectWithUri(URI);
+    this.db = client.database(dbName);
+    this.collection = this.db.collection(collectionName);
+  }
+}
 
-};
 
+export default Database;

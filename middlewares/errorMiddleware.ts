@@ -1,23 +1,19 @@
-import  { Request, Response, Next } from "https://deno.land/x/snowlight/mod.ts";
+import { RouterContext } from 'https://deno.land/x/oak/mod.ts'
 import  CustomError  from "../helpers/customError.ts"; 
 
-export const errorHandler = (err: CustomError, req: Request, res: Response, next: Next) => {
+export const errorHandler = (err: CustomError, contxt: RouterContext) => {
     
     const status = err.status || 500;
-    const message = err.message || 'UNKNOWN_ERROR_CAUSE'
+    const message = err.message || `UNKNOWN_ERROR_CAUSE`
 
-    console.log(err)
-
-    res
-        .status(status)
-        .send({
-                "timestamp": new Date(),
-                "status": 500,
-                "error": {
-                    "name": err.name,
-                    "message": err.message
-                },
-                "payload": null,
-                "endpoint": req.url
-        });
+    contxt.response.body = {
+        "timestamp": new Date(),
+        "status": 500,
+        "error": {
+            "name": err.name,
+            "message": err.message
+        },
+        "payload": null
+     };
+    contxt.response.status = 500;
 }

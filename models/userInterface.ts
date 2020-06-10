@@ -1,11 +1,11 @@
- /**
+
+/**
   * Create an Interface to describe structure of User JSON
   */
 
-  export interface user {
+  export interface IUser {
 
          name: string,
          age: number,
          dob: Date
-  }
-
+  };
